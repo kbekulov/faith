@@ -4,126 +4,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Since August 9th, 2023, 12:17 AM GMT+3</title>
+    <title>Time Since August 9th, 2023</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="background-layer lower"></div>
     <div class="background-layer upper"></div>
-
     <div class="container">
-        <div class="achievements" id="achievementsContainer"></div>
-        <div class="exp-gauge">
-            <div class="exp-fill" id="expFill"></div>
+        <div class="achievements" id="achievementsContainer">
+            <!-- Levels will be populated by JavaScript -->
         </div>
+        <div class="congrats-message" id="congratsMessage">Congratulations!</div>
         <div class="clock">
-            <span id="timer">0:00:00</span>
+            <span id="timer">00:00:00</span>
         </div>
         <div class="days">
             <span id="daysElapsed">0.00 days</span>
         </div>
-        <div class="quote" id="quoteBox"></div>
+        <div class="quote" id="quoteBlock">
+            <!-- Quote will be populated by JavaScript -->
+        </div>
     </div>
-
-    <div class="congrats-message" id="congratsMessage"></div>
-
     <script>
-        // Variables
-        const timerElem = document.getElementById('timer');
-        const daysElem = document.getElementById('daysElapsed');
-        const quoteBox = document.getElementById('quoteBox');
+        const timerElement = document.getElementById('timer');
+        const daysElapsedElement = document.getElementById('daysElapsed');
+        const quoteBlock = document.getElementById('quoteBlock');
         const achievementsContainer = document.getElementById('achievementsContainer');
         const congratsMessage = document.getElementById('congratsMessage');
-        const targetDate = new Date(Date.UTC(2023, 7, 9, 0, 17)); // August 9th, 00:17 AM, 2023 UTC
+
+        let quotes = [];
+        let currentIndex = 0;
         let lastLevel = 0;
 
-        // Quotes
-        let quotes = [];
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
 
-        // Fetch quotes from JSON file
-        fetch('quotes.json')
-            .then(response => response.json())
+        fetch('quotes.txt')
+            .then(response => response.text())
             .then(data => {
-                quotes = data;
+                const lines = data.trim().split('\n');
+                for (let line of lines) {
+                    const parts = line.split(' —');
+                    if (parts.length === 2) {
+                        quotes.push(parts);
+                    }
+                }
+                shuffleArray(quotes);
+                setNextQuote();
             })
             .catch(error => {
                 console.error("Error fetching quotes:", error);
             });
 
-        let displayedQuotes = [];
-
-        function getRandomQuote() {
-            if (displayedQuotes.length === quotes.length) {
-                displayedQuotes = [];
+        function setNextQuote() {
+            if (currentIndex >= quotes.length) {
+                shuffleArray(quotes);
+                currentIndex = 0;
             }
-
-            let randomQuote;
-            do {
-                randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-            } while (displayedQuotes.includes(randomQuote));
-
-            displayedQuotes.push(randomQuote);
-            return randomQuote;
+            const currentQuote = quotes[currentIndex];
+            quoteBlock.innerHTML = `${currentQuote[0]}<br><span style="font-weight: bold;">—${currentQuote[1]}</span>`;
+            currentIndex++;
         }
 
+        function cycleQuote() {
+            quoteBlock.style.opacity = 0;
+            setTimeout(() => {
+                setNextQuote();
+                quoteBlock.style.opacity = 1;
+            }, 1000);
+        }
+
+        setInterval(cycleQuote, 6666);
+
+        let skills = [];
+
+        fetch('skills.json')
+            .then(response => response.json())
+            .then(data => {
+                skills = data;
+            })
+            .catch(error => {
+                console.error("Error fetching skills:", error);
+            });
+    
         function updateAchievements(hours) {
             const level = Math.floor(hours / 10);
-            const exp = hours % 10;
-
-            // Update the EXP gauge
-            const expFill = document.getElementById('expFill');
-            expFill.style.width = (exp * 10) + '%';  // Convert the exp to percentage
-
             if (level > lastLevel) {
-                for (let i = lastLevel + 1; i <= level; i++) {
+                for(let i = lastLevel + 1; i <= level; i++) {
                     const levelDiv = document.createElement('div');
                     levelDiv.className = 'level-icon';
                     levelDiv.textContent = i;
-
-                    const tooltip = document.createElement('div');
-                    tooltip.className = 'tooltip';
-                    tooltip.innerHTML = `<b>Skill Name</b>: Skill Effect`;  // Update this part with the appropriate skill data
-                    levelDiv.appendChild(tooltip);
-
+    
+                    const skill = skills.find(skill => skill.Level === i * 10);
+                    if (skill) {
+                        const tooltip = document.createElement('div');
+                        tooltip.className = 'tooltip';
+                        tooltip.innerHTML = `Your earned <strong><u>${skill["Skill Name"]}</u></strong>: ${skill["Skill Effect"]}`;
+                        levelDiv.appendChild(tooltip);
+                    }
+    
                     achievementsContainer.appendChild(levelDiv);
                 }
-
+    
                 congratsMessage.textContent = `Congratulations! You are level ${level}!`;
                 congratsMessage.style.opacity = 1;
                 setTimeout(() => {
                     congratsMessage.style.opacity = 0;
                 }, 3000);
-
+    
                 lastLevel = level;
             }
         }
 
-        function updateTime() {
+        const targetDate = new Date(Date.UTC(2023, 7, 9, 0, 17 - 3, 0));
+
+        function updateClock() {
             const now = new Date();
-            const timeDiff = now - targetDate; // Difference in milliseconds
+            const nowInGMTPlus3 = new Date(now.getTime() + (3 * 60 * 60 * 1000));
+            const diff = nowInGMTPlus3 - targetDate;
+            const days = (diff / (1000 * 60 * 60 * 24)).toFixed(2);
 
-            const seconds = Math.floor(timeDiff / 1000);
-            const minutes = Math.floor(seconds / 60);
-            const hours = Math.floor(minutes / 60);
-            const days = (hours / 24).toFixed(2);
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
 
-            const displayHours = hours % 24;
-            const displayMinutes = minutes % 60;
-            const displaySeconds = seconds % 60;
-
-            timerElem.textContent = `${displayHours}:${displayMinutes.toString().padStart(2, '0')}:${displaySeconds.toString().padStart(2, '0')}`;
-            daysElem.textContent = `${days} days`;
+            timerElement.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            daysElapsedElement.textContent = `${days} days`;
 
             updateAchievements(hours);
         }
 
-        setInterval(() => {
-            updateTime();
-            quoteBox.innerHTML = getRandomQuote().split("—").join("<br>—");
-        }, 1000);
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
 
-        updateTime();  // Call the function immediately on page load
+            const lowerLayer = document.querySelector('.background-layer.lower');
+            const upperLayer = document.querySelector('.background-layer.upper');
+
+            lowerLayer.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.5)`;
+            upperLayer.style.transform = `translate(${x}px, ${y}px) scale(1.1)`;
+        });
+
+        setInterval(updateClock, 1000);
     </script>
 </body>
 
