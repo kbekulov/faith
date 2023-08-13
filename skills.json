@@ -1,0 +1,77 @@
+[
+  {
+    "Level": 10,
+    "Skill Name": "Eagle Eyes",
+    "Skill Effect": "Increase the caster's attack rate and attack range. Strengthen Body Attack Rate: +50 (+30.00 per Lv) Range: +1 Duration: 60.0 sec"
+  },
+  {
+    "Level": 20,
+    "Skill Name": "Power Shot",
+    "Skill Effect": "Create a spiritual arrow to attack a target. Magic Amp: 20% Add. Attack: +23.90 (+2.30 per Lv)"
+  },
+  {
+    "Level": 30,
+    "Skill Name": "Thrusting Arrow",
+    "Skill Effect": "Shoot an arrow that forcefully pushes back a target. Strengthen attack Knock Back: +11% (+1.00 per Lv) Duration: 60.0 sec"
+  },
+  {
+    "Level": 40,
+    "Skill Name": "Critical Shot",
+    "Skill Effect": "Concentrates one's strength to perform a critical attack. Magic Amp: 20% Add. Attack: +61.30 (+2.20 per Lv) Critical Dmg. inc.: +10% (+5% per Lv) Knock Back: +50%"
+  },
+  {
+    "Level": 50,
+    "Skill Name": "Art of Healing",
+    "Skill Effect": "Reinforce healing skills, and increase their effects. Strengthen General Attack Heal: +72% (+2.00 per Lv) Duration: 60.0 sec"
+  },
+  {
+    "Level": 60,
+    "Skill Name": "Explosion Shot",
+    "Skill Effect": "Shoot one's concentrated energy at the target, causing an explosion. Magic Amp: 30% Add. Attack: +93.90 (+1.80 per Lv) Root: +80%"
+  },
+  {
+    "Level": 70,
+    "Skill Name": "Art of Sniping",
+    "Skill Effect": "Stand firm on your spot, and concentrate your energy to increase the chance of hitting an enemy's vital point. Strengthen attack Critical Dmg. inc.: +52% (+2.00 per Lv) Critical Rate inc.: +6% (+1.00 per Lv) Unmovable Duration: 20.0 sec"
+  },
+  {
+    "Level": 80,
+    "Skill Name": "Poison Arrow",
+    "Skill Effect": "Shoot a magic arrow that poisons the enemy. Magic Amp: 60% Add. Attack: +136.90 (+2.20 per Lv) HP Down: -10 (Lasts for 10 sec)"
+  },
+  {
+    "Level": 90,
+    "Skill Name": "Curse remove",
+    "Skill Effect": "Releases the unmovable status. Release unmovable status Range: 1~8 Area: 1"
+  },
+  {
+    "Level": 100,
+    "Skill Name": "Shadow Shot",
+    "Skill Effect": "Summon an arrow from the shadow of an enemy. Magic Amp: 60% Add. Attack: +142.40 (+1.10 per Lv) Down: +50%"
+  },
+  {
+    "Level": 110,
+    "Skill Name": "Drilled Shot",
+    "Skill Effect": "Summon a magic drill from the ground to attack an enemy standing on a spot. Cannot miss. Magic Amp: 50% Add. Attack: +339.80 (+1.80 per Lv) Down: +85%"
+  },
+  {
+    "Level": 120,
+    "Skill Name": "Prismatic Arrow",
+    "Skill Effect": "A powerful attack using seven different kinds of the force. Magic Amp: 60% Add. Attack: +354.30 (+1.70 per Lv) Down: +85%"
+  },
+  {
+    "Level": 130,
+    "Skill Name": "Gravity Distortion",
+    "Skill Effect": "Destructive arrow which distorts the space around an enemy. Magic Amp: 70% Add. Attack: +514.00 (+4.00 per Lv) Stun: +85% (Lasts for 5 sec)"
+  },
+  {
+    "Level": 140,
+    "Skill Name": "Shooting Star",
+    "Skill Effect": "Summons numerous meteors from the sky, and inflict great damage to enemies. Magic Amp: 70% Add. Attack: +525.50 (+5.50 per Lv) Knock Back: +90%"
+  },
+  {
+    "Level": 150,
+    "Skill Name": "Sonic Shooter",
+    "Skill Effect": "Attack and harass the target at a speed so fast to see. Magic Amp: 70% Add. Attack: +707 (+7.00 per Lv) Stun: +84% (lasts 4 sec)"
+  }
+]
