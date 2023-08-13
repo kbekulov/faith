@@ -15,6 +15,9 @@
         <div class="achievements" id="achievementsContainer">
             <!-- Levels will be populated by JavaScript -->
         </div>
+        <div class="exp-gauge">
+            <div class="exp-progress"></div>
+        </div>
         <div class="congrats-message" id="congratsMessage">Congratulations!</div>
         <div class="clock">
             <span id="timer">00:00:00</span>
@@ -119,6 +122,10 @@
     
                 lastLevel = level;
             }
+            // Update EXP gauge
+            const expProgress = document.querySelector('.exp-progress');
+            const progressPercentage = (hours % 10) * 10; // Calculate percentage of the progress to next level
+            expProgress.style.width = `${progressPercentage}%`;
         }
 
         const targetDate = new Date(Date.UTC(2023, 7, 9, 0, 17 - 3, 0));
