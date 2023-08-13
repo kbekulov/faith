@@ -84,16 +84,19 @@
         function updateAchievements(hours) {
             const level = Math.floor(hours / 10);
             if (level > lastLevel) {
-                const levelDiv = document.createElement('div');
-                levelDiv.className = 'level-icon';
-                levelDiv.textContent = level;
-                achievementsContainer.appendChild(levelDiv);
-                
+                for(let i = lastLevel + 1; i <= level; i++) {
+                    const levelDiv = document.createElement('div');
+                    levelDiv.className = 'level-icon';
+                    levelDiv.textContent = i;
+                    achievementsContainer.appendChild(levelDiv);
+                }
+    
+                congratsMessage.textContent = `Congratulations! You are level ${level}!`;
                 congratsMessage.style.opacity = 1;
                 setTimeout(() => {
                     congratsMessage.style.opacity = 0;
                 }, 3000);
-
+    
                 lastLevel = level;
             }
         }
