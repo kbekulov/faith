@@ -81,6 +81,11 @@ body, html {
     position: relative;
 }
 
+.level-icon:last-child {
+    background-color: #333;  /* Darker color for the latest level */
+    color: #fff;
+}
+
 .level-icon:hover .tooltip {
     display: block;
 }
@@ -95,7 +100,8 @@ body, html {
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    white-space: nowrap;
+    white-space: normal;  /* Allow wrapping */
+    max-width: 200px;  /* Limit the width */
     z-index: 10;
     margin-top: 5px;
 }
