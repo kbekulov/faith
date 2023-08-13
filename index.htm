@@ -4,97 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Since August 9th, 2023</title>
+    <title>Time Since August 9th, 2023, 12:17 AM GMT+3</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="background-layer lower"></div>
     <div class="background-layer upper"></div>
+
     <div class="container">
-        <div class="achievements" id="achievementsContainer">
-            <!-- Levels will be populated by JavaScript -->
-        </div>
+        <div class="achievements" id="achievementsContainer"></div>
         <div class="exp-gauge">
-            <div class="exp-progress"></div>
+            <div class="exp-fill" id="expFill"></div>
         </div>
-        <div class="congrats-message" id="congratsMessage">Congratulations!</div>
         <div class="clock">
-            <span id="timer">00:00:00</span>
+            <span id="timer">0:00:00</span>
         </div>
         <div class="days">
             <span id="daysElapsed">0.00 days</span>
         </div>
-        <div class="quote" id="quoteBlock">
-            <!-- Quote will be populated by JavaScript -->
-        </div>
+        <div class="quote" id="quoteBox"></div>
     </div>
+
+    <div class="congrats-message" id="congratsMessage"></div>
+
     <script>
-        const timerElement = document.getElementById('timer');
-        const daysElapsedElement = document.getElementById('daysElapsed');
-        const quoteBlock = document.getElementById('quoteBlock');
+        // Variables
+        const timerElem = document.getElementById('timer');
+        const daysElem = document.getElementById('daysElapsed');
+        const quoteBox = document.getElementById('quoteBox');
         const achievementsContainer = document.getElementById('achievementsContainer');
         const congratsMessage = document.getElementById('congratsMessage');
-
-        let quotes = [];
-        let currentIndex = 0;
+        const targetDate = new Date(Date.UTC(2023, 7, 9, 0, 17)); // August 9th, 00:17 AM, 2023 UTC
         let lastLevel = 0;
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
+        // Quotes
+        let quotes = [];
 
-        fetch('quotes.txt')
-            .then(response => response.text())
+        // Fetch quotes from JSON file
+        fetch('quotes.json')
+            .then(response => response.json())
             .then(data => {
-                const lines = data.trim().split('\n');
-                for (let line of lines) {
-                    const parts = line.split(' —');
-                    if (parts.length === 2) {
-                        quotes.push(parts);
-                    }
-                }
-                shuffleArray(quotes);
-                setNextQuote();
+                quotes = data;
             })
             .catch(error => {
                 console.error("Error fetching quotes:", error);
             });
 
-        function setNextQuote() {
-            if (currentIndex >= quotes.length) {
-                shuffleArray(quotes);
-                currentIndex = 0;
+        let displayedQuotes = [];
+
+        function getRandomQuote() {
+            if (displayedQuotes.length === quotes.length) {
+                displayedQuotes = [];
             }
-            const currentQuote = quotes[currentIndex];
-            quoteBlock.innerHTML = `${currentQuote[0]}<br><span style="font-weight: bold;">—${currentQuote[1]}</span>`;
-            currentIndex++;
+
+            let randomQuote;
+            do {
+                randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            } while (displayedQuotes.includes(randomQuote));
+
+            displayedQuotes.push(randomQuote);
+            return randomQuote;
         }
 
-        function cycleQuote() {
-            quoteBlock.style.opacity = 0;
-            setTimeout(() => {
-                setNextQuote();
-                quoteBlock.style.opacity = 1;
-            }, 1000);
-        }
-
-        setInterval(cycleQuote, 6666);
-
-        let skills = [];
-
-        fetch('skills.json')
-            .then(response => response.json())
-            .then(data => {
-                skills = data;
-            })
-            .catch(error => {
-                console.error("Error fetching skills:", error);
-            });
-    
         function updateAchievements(hours) {
             const level = Math.floor(hours / 10);
             const exp = hours % 10;
@@ -127,36 +99,31 @@
             }
         }
 
-        const targetDate = new Date(Date.UTC(2023, 7, 9, 0, 17 - 3, 0));
-
-        function updateClock() {
+        function updateTime() {
             const now = new Date();
-            const nowInGMTPlus3 = new Date(now.getTime() + (3 * 60 * 60 * 1000));
-            const diff = nowInGMTPlus3 - targetDate;
-            const days = (diff / (1000 * 60 * 60 * 24)).toFixed(2);
+            const timeDiff = now - targetDate; // Difference in milliseconds
 
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff / (1000 * 60)) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
+            const seconds = Math.floor(timeDiff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = (hours / 24).toFixed(2);
 
-            timerElement.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            daysElapsedElement.textContent = `${days} days`;
+            const displayHours = hours % 24;
+            const displayMinutes = minutes % 60;
+            const displaySeconds = seconds % 60;
+
+            timerElem.textContent = `${displayHours}:${displayMinutes.toString().padStart(2, '0')}:${displaySeconds.toString().padStart(2, '0')}`;
+            daysElem.textContent = `${days} days`;
 
             updateAchievements(hours);
         }
 
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.pageX) / 50;
-            const y = (window.innerHeight / 2 - e.pageY) / 50;
+        setInterval(() => {
+            updateTime();
+            quoteBox.innerHTML = getRandomQuote().split("—").join("<br>—");
+        }, 1000);
 
-            const lowerLayer = document.querySelector('.background-layer.lower');
-            const upperLayer = document.querySelector('.background-layer.upper');
-
-            lowerLayer.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.5)`;
-            upperLayer.style.transform = `translate(${x}px, ${y}px) scale(1.1)`;
-        });
-
-        setInterval(updateClock, 1000);
+        updateTime();  // Call the function immediately on page load
     </script>
 </body>
 
