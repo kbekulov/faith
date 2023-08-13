@@ -127,16 +127,16 @@ body, html {
 
 .exp-gauge {
     width: 100%;
-    max-width: 300px; /* adjust if you want a different width */
-    height: 20px; /* height of the progress bar */
-    background-color: rgba(51, 51, 51, 0.1); /* 50% transparent dark grey */
+    max-width: 300px;
+    height: 10px;
+    background-color: rgba(51, 51, 51, 0.5);
     border-radius: 5px;
-    margin: 10px 0; /* spacing above and below the gauge */
-    overflow: hidden; /* to ensure the progress bar stays within the bounds */
+    margin: 10px 0;
+    overflow: hidden;
 }
 
 .exp-progress {
     height: 100%;
-    background-color: #333; /* dark grey */
-    width: 0%; /* initial width, this will be adjusted using JavaScript */
+    background-color: #333;
+    width: 0%;  /* This should start as 0% and the JS will adjust it */
 }
