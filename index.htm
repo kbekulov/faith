@@ -104,7 +104,7 @@
                     if (skill) {
                         const tooltip = document.createElement('div');
                         tooltip.className = 'tooltip';
-                        tooltip.innerHTML = `<b>${skill["Skill Name"]}</b>: ${skill["Skill Effect"]}`;
+                        tooltip.innerHTML = `<b>${skill["Skill Name"]}</b>${skill["Skill Effect"]}`;
                         levelDiv.appendChild(tooltip);
                     }
     
@@ -155,13 +155,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-    
-
