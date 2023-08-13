@@ -125,7 +125,7 @@
             // Update EXP gauge
             const expProgress = document.querySelector('.exp-progress');
             const totalElapsedHours = hours + (minutes / 60) + (seconds / 3600);
-            const progressPercentage = (totalElapsedHours % 10) * 10;
+            const progressPercentage = (totalElapsedHours % 10) / 10 * 100;  // Corrected calculation
             expProgress.style.width = `${progressPercentage}%`;
         }
 
