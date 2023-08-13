@@ -81,6 +81,17 @@
 
         setInterval(cycleQuote, 6666);
 
+        let skills = [];
+
+        fetch('skills.json')
+            .then(response => response.json())
+            .then(data => {
+                skills = data;
+            })
+            .catch(error => {
+                console.error("Error fetching skills:", error);
+            });
+    
         function updateAchievements(hours) {
             const level = Math.floor(hours / 10);
             if (level > lastLevel) {
@@ -88,6 +99,15 @@
                     const levelDiv = document.createElement('div');
                     levelDiv.className = 'level-icon';
                     levelDiv.textContent = i;
+    
+                    const skill = skills.find(skill => skill.Level === i * 10);
+                    if (skill) {
+                        const tooltip = document.createElement('div');
+                        tooltip.className = 'tooltip';
+                        tooltip.innerHTML = `<b>${skill["Skill Name"]}</b>: ${skill["Skill Effect"]}`;
+                        levelDiv.appendChild(tooltip);
+                    }
+    
                     achievementsContainer.appendChild(levelDiv);
                 }
     
@@ -135,3 +155,13 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+    
+
