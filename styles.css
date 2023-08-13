@@ -129,7 +129,7 @@ body, html {
     width: 100%;
     max-width: 300px; /* adjust if you want a different width */
     height: 2px; /* height of the progress bar */
-    background-color: rgba(51, 51, 51, 0.3); /* 50% transparent dark grey */
+    background-color: rgba(51, 51, 51, 0.1); /* 50% transparent dark grey */
     border-radius: 5px;
     margin: 10px 0; /* spacing above and below the gauge */
     overflow: hidden; /* to ensure the progress bar stays within the bounds */
