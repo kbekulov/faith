@@ -123,9 +123,9 @@
                 lastLevel = level;
             }
             // Update EXP gauge
-            const expProgress = document.querySelector('.exp-progress');
             const totalElapsedHours = hours + (minutes / 60) + (seconds / 3600);
-            const progressPercentage = (totalElapsedHours % 10) / 10 * 100;  // Corrected calculation
+            const progressPercentage = (totalElapsedHours % 10) / 10 * 100;
+            const expProgress = document.querySelector('.exp-progress');
             expProgress.style.width = `${progressPercentage}%`;
         }
 
