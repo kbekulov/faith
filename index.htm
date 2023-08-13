@@ -97,36 +97,34 @@
     
         function updateAchievements(hours) {
             const level = Math.floor(hours / 10);
+            const exp = hours % 10;
+
+            // Update the EXP gauge
+            const expFill = document.getElementById('expFill');
+            expFill.style.width = (exp * 10) + '%';  // Convert the exp to percentage
+
             if (level > lastLevel) {
-                for(let i = lastLevel + 1; i <= level; i++) {
+                for (let i = lastLevel + 1; i <= level; i++) {
                     const levelDiv = document.createElement('div');
                     levelDiv.className = 'level-icon';
                     levelDiv.textContent = i;
-    
-                    const skill = skills.find(skill => skill.Level === i * 10);
-                    if (skill) {
-                        const tooltip = document.createElement('div');
-                        tooltip.className = 'tooltip';
-                        tooltip.innerHTML = `Your earned <strong><u>${skill["Skill Name"]}</u></strong>: ${skill["Skill Effect"]}`;
-                        levelDiv.appendChild(tooltip);
-                    }
-    
+
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'tooltip';
+                    tooltip.innerHTML = `<b>Skill Name</b>: Skill Effect`;  // Update this part with the appropriate skill data
+                    levelDiv.appendChild(tooltip);
+
                     achievementsContainer.appendChild(levelDiv);
                 }
-    
+
                 congratsMessage.textContent = `Congratulations! You are level ${level}!`;
                 congratsMessage.style.opacity = 1;
                 setTimeout(() => {
                     congratsMessage.style.opacity = 0;
                 }, 3000);
-    
+
                 lastLevel = level;
             }
-            // Update EXP gauge
-            const totalElapsedHours = hours + (minutes / 60) + (seconds / 3600);
-            const progressPercentage = (totalElapsedHours % 10) / 10 * 100;
-            const expProgress = document.querySelector('.exp-progress');
-            expProgress.style.width = `${progressPercentage}%`;
         }
 
         const targetDate = new Date(Date.UTC(2023, 7, 9, 0, 17 - 3, 0));
