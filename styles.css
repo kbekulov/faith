@@ -126,17 +126,17 @@ body, html {
 }
 
 .exp-gauge {
-    width: 100%;
-    max-width: 300px;
-    height: 10px;
-    background-color: rgba(51, 51, 51, 0.5);
-    border-radius: 5px;
+    width: 80%;
+    height: 20px;
+    background-color: rgba(51, 51, 51, 0.5); /* 50% transparent dark grey */
+    border-radius: 10px;
     margin: 10px 0;
+    position: relative;
     overflow: hidden;
 }
 
-.exp-progress {
+.exp-fill {
     height: 100%;
-    background-color: #333;
-    width: 0%;  /* This should start as 0% and the JS will adjust it */
+    background-color: #333; /* Dark grey */
+    border-radius: 10px 0 0 10px; /* Rounded left corners to match the container when it's not full */
 }
