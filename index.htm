@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time Since August 9th, 2023</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body, html {
             height: 100%;
@@ -68,6 +69,19 @@
             transition: opacity 1s ease-in-out;
             opacity: 1;
         }
+
+        .achievements {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .achievement-icon {
+            margin: 0 10px;
+            font-size: 24px;
+            opacity: 0.3;  /* Initially make all icons semi-transparent */
+        }
     </style>
 </head>
 
@@ -75,6 +89,12 @@
     <div class="background-layer lower"></div>
     <div class="background-layer upper"></div>
     <div class="container">
+        <div class="achievements">
+            <i class="fas fa-star achievement-icon" id="icon1"></i>
+            <i class="fas fa-trophy achievement-icon" id="icon2"></i>
+            <i class="fas fa-crown achievement-icon" id="icon3"></i>
+            <!-- Add more icons as needed -->
+        </div>
         <div class="clock">
             <span id="timer">00:00:00</span>
         </div>
@@ -94,6 +114,7 @@
 
         let quotes = [];
         let currentIndex = 0;
+        let lastLevel = 0;
 
         // Shuffle function (Fisher-Yates/Durstenfeld)
         function shuffleArray(array) {
@@ -140,6 +161,20 @@
 
         setInterval(cycleQuote, 6666);
 
+        function updateAchievements(hours) {
+            const level = Math.floor(hours / 10);
+            for (let i = 1; i <= level; i++) {
+                const iconElement = document.getElementById('icon' + i);
+                if (iconElement) {
+                    iconElement.style.opacity = 1; // Make the icon fully visible
+                }
+            }
+            if (level > lastLevel) {
+                alert(`Congratulations! You are level ${level}!`);
+                lastLevel = level;
+            }
+        }
+
         const targetDate = new Date(Date.UTC(2023, 7, 9, 0, 17 - 3, 0));
 
         function updateClock() {
@@ -154,6 +189,8 @@
 
             timerElement.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
             daysElapsedElement.textContent = `${days} days`;
+
+            updateAchievements(hours);
         }
 
         document.addEventListener('mousemove', (e) => {
