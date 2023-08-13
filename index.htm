@@ -6,7 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time Since August 9th, 2023</title>
     <style>
-        /* ... (existing CSS styles remain unchanged) ... */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .background-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            pointer-events: none;
+        }
+
+        .background-layer.lower {
+            background-image: url('toh2.png');
+            z-index: 1;
+            transform: scale(1.5);
+        }
+
+        .background-layer.upper {
+            background-image: url('toh1.png');
+            z-index: 2;
+            transform: scale(1.1);
+        }
+
+        .container {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .clock, .days, .quote {
+            margin: 20px 0;
+        }
+
+        #timer {
+            font-size: 3em;
+            color: #333;
+        }
+
+        #daysElapsed {
+            font-size: 1em;
+            color: #333;
+        }
+
+        .quote {
+            font-size: 2em;
+            font-style: italic;
+            text-align: center;
+            max-width: 80%;
+            transition: opacity 1s ease-in-out;
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -32,8 +93,16 @@
         const upperLayer = document.querySelector('.background-layer.upper');
 
         let quotes = [];
+        let currentIndex = 0;
 
-        // Fetch quotes from the txt file
+        // Shuffle function (Fisher-Yates/Durstenfeld)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+            }
+        }
+
         fetch('quotes.txt')
             .then(response => response.text())
             .then(data => {
@@ -44,41 +113,27 @@
                         quotes.push(parts);
                     }
                 }
-                // Initial shuffle and set a quote after fetching
-                shuffledQuotes = shuffleArray([...quotes]);
-                setRandomQuote();
+                shuffleArray(quotes);
+                setNextQuote();
             })
             .catch(error => {
                 console.error("Error fetching quotes:", error);
             });
 
-        let shuffledQuotes = [];
-        let currentQuoteIndex = 0;
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];  // Swap elements
+        function setNextQuote() {
+            if (currentIndex >= quotes.length) {
+                shuffleArray(quotes);
+                currentIndex = 0;
             }
-            return array;
-        }
-
-        function setRandomQuote() {
-            // Check if all quotes have been shown
-            if (currentQuoteIndex >= shuffledQuotes.length) {
-                shuffledQuotes = shuffleArray([...quotes]);  // Shuffle again
-                currentQuoteIndex = 0;
-            }
-
-            const randomQuote = shuffledQuotes[currentQuoteIndex];
-            quoteBlock.innerHTML = `${randomQuote[0]}<br><span style="font-weight: bold;">—${randomQuote[1]}</span>`;
-            currentQuoteIndex++;
+            const currentQuote = quotes[currentIndex];
+            quoteBlock.innerHTML = `${currentQuote[0]}<br><span style="font-weight: bold;">—${currentQuote[1]}</span>`;
+            currentIndex++;
         }
 
         function cycleQuote() {
             quoteBlock.style.opacity = 0;
             setTimeout(() => {
-                setRandomQuote();
+                setNextQuote();
                 quoteBlock.style.opacity = 1;
             }, 1000);
         }
