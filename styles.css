@@ -59,6 +59,7 @@ body, html {
     max-width: 80%;
     transition: opacity 1s ease-in-out;
     opacity: 1;
+    min-height: 100px; /* Set a minimum height to ensure consistent space */
 }
 
 .achievements {
