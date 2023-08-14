@@ -73,5 +73,155 @@
     "Level": 150,
     "Skill Name": "Sonic Shooter",
     "Skill Effect": "Attack and harass the target at a speed so fast to see. Magic Amp: 70% Add. Attack: +707 (+7.00 per Lv) Stun: +84% (lasts 4 sec)"
+  },
+  {
+    "Level": 160,
+    "Skill Name": "Force Stab",
+    "Skill Effect": "Stab a target with a force enhanced sword. Attack Amp: 5% (+0.50% per level) Add. Attack: +34 (+3.5 per Lv)"
+  },
+  {
+    "Level": 170,
+    "Skill Name": "Fire Blade",
+    "Skill Effect": "Enchant your sword with the power of fire. Strengthen Weapons Attack: +4 (+4.00 per Lv) Critical Rate inc.: +1 (+1 per Lv)% Penetration: +12 (+2 per Lv)"
+  },
+  {
+    "Level": 180,
+    "Skill Name": "Force Slash",
+    "Skill Effect": "Stab twice with a force enhanced sword. Attack Amp: 5% (+0.50% per level) Add. Attack: +59.50 (+1.50 per Lv)"
+  },
+  {
+    "Level": 190,
+    "Skill Name": "Ice Blade",
+    "Skill Effect": "Enchant your sword with the power of ice. Strengthen Weapons Attack: +4 (+4.00 per Lv) Critical Rate inc.: +1 (+1 per Lv)% Damage reduce: +5 (+5 per Lv)"
+  },
+  {
+    "Level": 200,
+    "Skill Name": "Force Break",
+    "Skill Effect": "Enables the caster to add more force on a sword each time it is used. Attack Amp: 15% (+0.50% per level) Add. Attack: +112.50 (+2.50 per Lv)"
+  },
+  {
+    "Level": 210,
+    "Skill Name": "Lightning Blade",
+    "Skill Effect": "Enchant your sword with the power of lightning. Strengthen Weapons Attack: +4 (+4.00 per Lv) Critical Rate inc.: +1 (+1 per Lv)% Accuracy: +120 (+20 per Lv)"
+  },
+  {
+    "Level": 220,
+    "Skill Name": "Soaring Shot",
+    "Skill Effect": "Cut down a target using a force enhanced sword. Attack Amp: 25% (+0.50% per level) Add. Attack: +157 (+3.50 per Lv)"
+  },
+  {
+    "Level": 230,
+    "Skill Name": "Guard Break",
+    "Skill Effect": "Decrease the defense rate of an enemy. Defense Rate: -15"
+  },
+  {
+    "Level": 240,
+    "Skill Name": "Illusion Stab",
+    "Skill Effect": "Repeatedly stab a target with a force enhanced sword. Attack Amp: 25% (+0.50% per level) Add. Attack: +192.5 (+4.50 per Lv)"
+  },
+  {
+    "Level": 250,
+    "Skill Name": "Curse of Wither",
+    "Skill Effect": "Decrease the defense of an enemy. Defense: -12 Attack Rate: -120 Accuracy: -60"
+  },
+  {
+    "Level": 260,
+    "Skill Name": "Force Assault",
+    "Skill Effect": "Stab a target while dashing. Add. Attack: +161 (+2.63 per Lv)"
+  },
+  {
+    "Level": 270,
+    "Skill Name": "Enervation",
+    "Skill Effect": "Decrease an enemy's level. Level Down: -4.4 (+0.4 per Lv)"
+  },
+  {
+    "Level": 280,
+    "Skill Name": "Force Drive",
+    "Skill Effect": "Temporarily focus one's power on a sword to do more damage on a target. Attack Amp: 35% (+0.50% per level) Add. Attack: +254 (+3.89 per Lv)"
+  },
+  {
+    "Level": 290,
+    "Skill Name": "Execration",
+    "Skill Effect": "Concentrate your energy, to curse a target, and bind the target on one spot. Unmovable"
+  },
+  {
+    "Level": 300,
+    "Skill Name": "Dance of Ruin",
+    "Skill Effect": "Leap toward a target and attack with might. Attack Amp: 35% (+0.50% per level) Add. Attack: +285 (+4.21 per Lv)"
+  },
+  {
+    "Level": 310,
+    "Skill Name": "Hard Luck",
+    "Skill Effect": "A wheel of infinite misfortune. Resist Critical Rate: -10% Resist Critical Damage: -10%"
+  },
+  {
+    "Level": 320,
+    "Skill Name": "Infernal Stigma",
+    "Skill Effect": "A sign from hell that attacks many foes at once. Attack Amp: 45% (+0.50% per level) Add. Attack: +630 (+7.79 per Lv)"
+  },
+  {
+    "Level": 330,
+    "Skill Name": "Darkness",
+    "Skill Effect": "Temporarily blind a target to decrease the attack range. Attack Distance: -2"
+  },
+  {
+    "Level": 340,
+    "Skill Name": "Abyssal Crystal",
+    "Skill Effect": "Deliver collected, concentrated force to a target. Attack Amp: 45% (+0.50% per level) Add. Attack: +332 (+1.79 per Lv)"
+  },
+  {
+    "Level": 350,
+    "Skill Name": "Art of Curse",
+    "Skill Effect": "My curse will sail against the wind, and enrage the earth.Maximum Defense : 80% (skill Lv20) Resist Unable to move: -12% (+2% per Lv) Resist Down: -12% (+2% per Lv) Resist Knock Back: -12% (+2% per Lv) Resist Stun: -12% (+2% per Lv)"
+  },
+  {
+    "Level": 360,
+    "Skill Name": "Force Impact",
+    "Skill Effect": "Destabilize the force surrounding you, and cause critical explosions. Attack Amp: 55% (+0.50% per level) Add. Attack: +1,129 (+3.53 per Lv)"
+  },
+  {
+    "Level": 370,
+    "Skill Name": "Curse of Freeze",
+    "Skill Effect": "Temporarily limit a target's adjustable maximum mana. MP: -1400"
+  },
+  {
+    "Level": 380,
+    "Skill Name": "Infernal Impact",
+    "Skill Effect": "Violent scamp from hell doesn't allow any chance. Attack Amp: 61% (+1% per level) Add. Attack: +1,427 (+10.42 per Lv)"
+  },
+  {
+    "Level": 390,
+    "Skill Name": "Field of Enervation",
+    "Skill Effect": "Decrease the level of multiple enemies. Level Down: -4.4 (+0.4 per Lv)"
+  },
+  {
+    "Level": 400,
+    "Skill Name": "Assassinate",
+    "Skill Effect": "It engraves a stigma on the back of victims and destroys them with a stigma. Attack Amp: 61% (+1% per level) Add. Attack: +1,617 (+11.32 per Lv)"
+  },
+  {
+    "Level": 410,
+    "Skill Name": "Field of Execration",
+    "Skill Effect": "Bind multiple enemies on their spots. Unmovable"
+  },
+  {
+    "Level": 420,
+    "Skill Name": "Seal of Damnation",
+    "Skill Effect": "Breaks the seal of Hell to cast the target into an endless damnation. Attack Amp: 76% (+1% per level) Add. Attack: +1,813 (+18.21 per Lv.)"
+  },
+  {
+    "Level": 430,
+    "Skill Name": "Elemental Enchant",
+    "Skill Effect": "Strengthen the body with the power of elements. Lightning Blade Aura: +200% Evasion Ice Blade Aura: +200% Damage Reduce Fire Blade Aura: +200% Penetration"
+  },
+  {
+    "Level": 440,
+    "Skill Name": "Quake Cataclysm",
+    "Skill Effect": "Bring cataclysm with blades rising from the earth and the power of lightening. Attack Amp: 76% (+1% per level) Add. Attack: +2,230 (+18.21 per Lv.)"
+  },
+  {
+    "Level": 450,
+    "Skill Name": "Lightning Revenge",
+    "Skill Effect": "Control lightening force to attack anyone blocking the way. Attack Amp: 86% (+1.0% per level) Add. Attack: +2618 (+35.42 per Lv.)"
   }
 ]
