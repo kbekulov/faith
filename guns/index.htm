@@ -47,16 +47,17 @@
   <script>
     // Replace this array with the actual file names from your 'items' folder
     const items = [
-      'P22Q-(1423).jpg',
-      'P22Q-(1423).jpg',
-      'P22Q-(1423).jpg'
+      'P365-(144432).jpg',
+      'G48MOS-(423233).jpg',
+      'P365SC-(334332).jpg',
+      'P22Q-(244424).jpg'
     ];
 
     const parseItem = (filename) => {
       const [nameWithProps, extension] = filename.split('.');
       const [name, properties] = nameWithProps.split('-(');
-      const [accuracy, size, weight, concealability] = properties.slice(0, -1).split('');
-      return { name, accuracy, size, weight, concealability, extension };
+      const [accuracy, size, weight, concealability, stoppingPower, safety] = properties.slice(0, -1).split('');
+      return { name, accuracy, size, weight, concealability, stoppingPower, safety, extension };
     };
 
     const createItemElement = (item) => {
@@ -65,20 +66,20 @@
 
       const img = document.createElement('img');
       img.className = 'thumbnail';
-      img.src = `items/${item.name}-(${item.accuracy}${item.size}${item.weight}${item.concealability}).${item.extension}`;
+      img.src = `items/${item.name}-(${item.accuracy}${item.size}${item.weight}${item.concealability}${item.stoppingPower}${item.safety}).${item.extension}`;
       itemDiv.appendChild(img);
 
       const title = document.createElement('h3');
       title.textContent = item.name;
       itemDiv.appendChild(title);
 
-      ['accuracy', 'size', 'weight', 'concealability'].forEach((prop) => {
+      ['accuracy', 'size', 'weight', 'concealability', 'stoppingPower', 'safety'].forEach((prop) => {
         const progressBar = document.createElement('div');
         progressBar.className = 'progress-bar';
 
         const progress = document.createElement('div');
         progress.className = 'progress';
-        progress.style.width = `${item[prop] * 25.00}%`;
+        progress.style.width = `${item[prop] * 33.33}%`;
         progress.textContent = prop;
 
         progressBar.appendChild(progress);
