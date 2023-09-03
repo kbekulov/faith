@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Item Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      color: #333;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .item {
+      margin: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .thumbnail {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+    }
+    .progress-bar {
+      height: 20px;
+      background-color: #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress {
+      height: 100%;
+      background-color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="itemContainer">
+    <!-- Items will be inserted here -->
+  </div>
+
+  <script>
+    // Mockup list of filenames
+    const filenames = ["P22Q-(1324).jpg", "M16A-(3214).png", "AK47-(2413).jpeg"];
+
+    const parseFilename = (filename) => {
+      const [name, properties] = filename.split("-(.");
+      const [accuracy, size, weight, concealability] = properties.split("");
+      return { name, accuracy, size, weight, concealability };
+    };
+
+    const createItemElement = ({ name, accuracy, size, weight, concealability }) => {
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "item";
+
+      const img = document.createElement("img");
+      img.className = "thumbnail";
+      img.src = `items/${name}-(${accuracy}${size}${weight}${concealability}).jpg`;
+      itemDiv.appendChild(img);
+
+      const title = document.createElement("h3");
+      title.innerText = name;
+      itemDiv.appendChild(title);
+
+      const properties = [
+        { label: "Accuracy", level: accuracy },
+        { label: "Size", level: size },
+        { label: "Weight (lightness)", level: weight },
+        { label: "Concealability", level: concealability },
+      ];
+
+      properties.forEach(({ label, level }) => {
+        const progressBar = document.createElement("div");
+        progressBar.className = "progress-bar";
+
+        const progress = document.createElement("div");
+        progress.className = "progress";
+        progress.style.width = `${(level / 4) * 100}%`;
+
+        progressBar.appendChild(progress);
+        itemDiv.appendChild(progressBar);
+      });
+
+      return itemDiv;
+    };
+
+    const itemContainer = document.getElementById("itemContainer");
+
+    filenames.forEach((filename) => {
+      const itemData = parseFilename(filename);
+      const itemElement = createItemElement(itemData);
+      itemContainer.appendChild(itemElement);
+    });
+  </script>
+
+</body>
+</html>
