@@ -53,8 +53,9 @@
     ];
 
     const parseItem = (filename) => {
-      const [name, properties] = filename.split('-');
-      const [accuracy, size, weight, concealability] = properties.slice(1, -1).split('');
+      const [nameWithProps, extension] = filename.split('.');
+      const [name, properties] = nameWithProps.split('-(');
+      const [accuracy, size, weight, concealability] = properties.slice(0, -1).split('');
       return { name, accuracy, size, weight, concealability };
     };
 
@@ -64,7 +65,7 @@
 
       const img = document.createElement('img');
       img.className = 'thumbnail';
-      img.src = `items/${item.name}.jpg`; // Update the path based on your folder structure
+      img.src = `items/${item.name}-(${item.accuracy}${item.size}${item.weight}${item.concealability}).${item.extension}`; // Update the path based on your folder structure
       itemDiv.appendChild(img);
 
       const title = document.createElement('h3');
