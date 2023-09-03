@@ -43,8 +43,16 @@
   </div>
 
   <script>
-    // Mockup list of filenames
-    const filenames = ["P22Q-(1324).jpg", "M16A-(3214).png", "AK47-(2413).jpeg"];
+    // Fetch filenames from your server API (replace with your actual API)
+    fetch('/api/getFilenames')
+    .then(response => response.json())
+    .then(filenames => {
+      filenames.forEach(filename => {
+        const itemData = parseFilename(filename);
+        const itemElement = createItemElement(itemData);
+        itemContainer.appendChild(itemElement);
+      });
+    });
 
     const parseFilename = (filename) => {
       const [name, properties] = filename.split("-(.");
@@ -88,12 +96,6 @@
     };
 
     const itemContainer = document.getElementById("itemContainer");
-
-    filenames.forEach((filename) => {
-      const itemData = parseFilename(filename);
-      const itemElement = createItemElement(itemData);
-      itemContainer.appendChild(itemElement);
-    });
   </script>
 
 </body>
