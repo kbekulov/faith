@@ -47,16 +47,16 @@
   <script>
     // Replace this array with the actual file names from your 'items' folder
     const items = [
-      'P22Q-(1423).jpg',
-      'P22Q-(1423).jpg',
-      'P22Q-(1423).jpg'
+      'P22Q-(1324).jpg',
+      'M16A-(3312).png',
+      'AK47-(3231).jpeg'
     ];
 
     const parseItem = (filename) => {
       const [nameWithProps, extension] = filename.split('.');
       const [name, properties] = nameWithProps.split('-(');
       const [accuracy, size, weight, concealability] = properties.slice(0, -1).split('');
-      return { name, accuracy, size, weight, concealability };
+      return { name, accuracy, size, weight, concealability, extension };
     };
 
     const createItemElement = (item) => {
@@ -65,7 +65,7 @@
 
       const img = document.createElement('img');
       img.className = 'thumbnail';
-      img.src = `items/${item.name}-(${item.accuracy}${item.size}${item.weight}${item.concealability}).${item.extension}`; // Update the path based on your folder structure
+      img.src = `items/${item.name}-(${item.accuracy}${item.size}${item.weight}${item.concealability}).${item.extension}`;
       itemDiv.appendChild(img);
 
       const title = document.createElement('h3');
