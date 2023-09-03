@@ -5,80 +5,80 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      color: #333;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
     }
     .container {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
     }
     .item {
-      margin: 20px;
+      border: 1px solid #ccc;
+      margin: 10px;
+      padding: 10px;
+      width: 200px;
       background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     .thumbnail {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
+      width: 100%;
     }
     .progress-bar {
       height: 20px;
       background-color: #ccc;
-      border-radius: 10px;
-      overflow: hidden;
     }
     .progress {
       height: 100%;
       background-color: #4CAF50;
+      text-align: center;
+      line-height: 20px;
+      color: white;
     }
   </style>
 </head>
 <body>
-
   <div class="container" id="itemContainer">
-    <!-- Items will be inserted here -->
+    <!-- Items will be populated here -->
   </div>
 
   <script>
-    // Mockup list of filenames
-    const filenames = ["P22Q-(1423).jpg"];
+    // Replace this array with the actual file names from your 'items' folder
+    const items = [
+      'P22Q-(1423).jpg',
+      'P22Q-(1423).jpg',
+      'P22Q-(1423).jpg'
+    ];
 
-    const parseFilename = (filename) => {
-      const [name, properties] = filename.split("-(.");
-      const [accuracy, size, weight, concealability] = properties.split("");
+    const parseItem = (filename) => {
+      const [name, properties] = filename.split('-');
+      const [accuracy, size, weight, concealability] = properties.slice(1, -1).split('');
       return { name, accuracy, size, weight, concealability };
     };
 
-    const createItemElement = ({ name, accuracy, size, weight, concealability }) => {
-      const itemDiv = document.createElement("div");
-      itemDiv.className = "item";
+    const createItemElement = (item) => {
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'item';
 
-      const img = document.createElement("img");
-      img.className = "thumbnail";
-      img.src = `items/${name}-(${accuracy}${size}${weight}${concealability}).jpg`;
+      const img = document.createElement('img');
+      img.className = 'thumbnail';
+      img.src = `items/${item.name}.jpg`; // Update the path based on your folder structure
       itemDiv.appendChild(img);
 
-      const title = document.createElement("h3");
-      title.innerText = name;
+      const title = document.createElement('h3');
+      title.textContent = item.name;
       itemDiv.appendChild(title);
 
-      const properties = [
-        { label: "Accuracy", level: accuracy },
-        { label: "Size", level: size },
-        { label: "Weight (lightness)", level: weight },
-        { label: "Concealability", level: concealability },
-      ];
+      ['accuracy', 'size', 'weight', 'concealability'].forEach((prop) => {
+        const progressBar = document.createElement('div');
+        progressBar.className = 'progress-bar';
 
-      properties.forEach(({ label, level }) => {
-        const progressBar = document.createElement("div");
-        progressBar.className = "progress-bar";
-
-        const progress = document.createElement("div");
-        progress.className = "progress";
-        progress.style.width = `${(level / 4) * 100}%`;
+        const progress = document.createElement('div');
+        progress.className = 'progress';
+        progress.style.width = `${item[prop] * 33.33}%`;
+        progress.textContent = prop;
 
         progressBar.appendChild(progress);
         itemDiv.appendChild(progressBar);
@@ -87,14 +87,13 @@
       return itemDiv;
     };
 
-    const itemContainer = document.getElementById("itemContainer");
+    const itemContainer = document.getElementById('itemContainer');
 
-    filenames.forEach((filename) => {
-      const itemData = parseFilename(filename);
-      const itemElement = createItemElement(itemData);
+    items.forEach((filename) => {
+      const item = parseItem(filename);
+      const itemElement = createItemElement(item);
       itemContainer.appendChild(itemElement);
     });
   </script>
-
 </body>
 </html>
